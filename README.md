@@ -51,12 +51,14 @@ prom-label-proxy \
 
 Accessing demo Prometheus APIs on `127.0.0.1:8080` will now expect `tenant` query parameter to be set in the URL:
 
-```bash
-➜  ~ curl http://127.0.0.1:8080/api/v1/query\?query="up"
-Bad request. The "tenant" query parameter must be provided.
-➜  ~ curl http://127.0.0.1:8080/api/v1/query\?query="up"\&tenant\="something"
-{"status":"success","data":{"resultType":"vector","result":[]}}%   
 ```
+curl http://127.0.0.1:8080/api/v1/query\?query="up"
+```
+Output: Bad request. The "tenant" query parameter must be provided.
+```
+curl http://127.0.0.1:8080/api/v1/query\?query="up"\&tenant\="something"
+```
+Output: {"status":"success","data":{"resultType":"vector","result":[]}}
 
 Once again for clarity: **this project only enforces a particular label in the respective calls to Prometheus, it in itself does not authenticate or
 authorize the requesting entity in any way, this has to be built around this project.**
